@@ -10,9 +10,9 @@ import Data.List (intercalate, isInfixOf)
 
 -- Finds the next index, skipping the opponent's store
 getNextIndex :: Int -> Int -> Int
-getNextIndex 1 12 = 0   
+getNextIndex 1 12 = 0
 getNextIndex 1 i  = i + 1
-getNextIndex 2 5  = 7   
+getNextIndex 2 5  = 7
 getNextIndex 2 13 = 0
 getNextIndex 2 i  = i + 1
 
@@ -50,9 +50,17 @@ displayBoard b =
         p1holes = take 6 b
         p1box = b !! 6
         p2box = b !! 13
-        pad n = if n < 10 then " " ++ show n ++ " " else " " ++ show n
-        topRow = (if p2box > 0 then show p2box ++ " " else "") ++ "|" ++ intercalate "|" (map pad p2holes) ++ "|"
-        bottomRow = (if p2box > 0 then replicate (length (show p2box) + 1) ' ' else "") ++ "|" ++ intercalate "|" (map pad p1holes) ++ "|" ++ (if p1box > 0 then " " ++ show p1box else "")
+        
+        -- Empty if 0
+        pad 0 = "   "
+        pad n = if n < 10 then " " ++ show n ++ " " else " " ++ show ng
+        fmtBox 0 = "  "
+        fmtBox n = if n < 10 then " " ++ show n else show n
+    
+        p2Str = fmtBox p2box
+        p1Str = fmtBox p1box
+        topRow = p2Str ++ " |" ++ intercalate "|" (map pad p2holes) ++ "|"
+        bottomRow = "   |" ++ intercalate "|" (map pad p1holes) ++ "| " ++ p1Str
     in "\n" ++ topRow ++ "\n" ++ bottomRow ++ "\n"
 
 -- Check if any side is empty
