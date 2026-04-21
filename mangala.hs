@@ -53,7 +53,7 @@ displayBoard b =
         
         -- Empty if 0
         pad 0 = "   "
-        pad n = if n < 10 then " " ++ show n ++ " " else " " ++ show ng
+        pad n = if n < 10 then " " ++ show n ++ " " else " " ++ show n
         fmtBox 0 = "  "
         fmtBox n = if n < 10 then " " ++ show n else show n
     
